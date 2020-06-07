@@ -11,7 +11,7 @@
                 <span class="container__text input__text text__task">{{ body }}</span>
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
-                <input type="date" id="due-date" class="input input__date" disabled>
+                <input type="date" id="due-date" class="input input__date" value="2020-01-07" disabled>
             </div>
         </div>
     </div>

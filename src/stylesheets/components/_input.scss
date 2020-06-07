@@ -11,10 +11,11 @@
 
     &__text {
         width: auto;
-        flex-grow: 2;
+        flex-grow: 1;
     }
 
     &__date {
+        min-width: 15rem;
         width: auto;
     }
 
