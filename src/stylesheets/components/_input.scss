@@ -1,0 +1,31 @@
+.input {
+
+    height: 4rem;
+    font-size: 2rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    box-shadow: inset 0 0 .05rem grey;
+    margin: .1rem;
+    overflow: hidden;
+    color: $f-color-default;
+
+    &__text {
+        width: auto;
+        flex-grow: 2;
+    }
+
+    &__date {
+        width: auto;
+    }
+
+    &__submit {
+        width: auto;
+        padding: 0 1.2rem;
+        background-color: white;
+
+        &:hover {
+            background-color: lightgrey;
+        }
+    }
+
+}

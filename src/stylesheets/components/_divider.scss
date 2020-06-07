@@ -1,0 +1,10 @@
+.divider {
+
+    &__vertical {
+        height: 90%;
+        width: .1rem;
+        background-color: rgba(0, 0, 0, 0.16);        
+        display: inline-block;
+    }
+
+}
