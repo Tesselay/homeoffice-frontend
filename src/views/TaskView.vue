@@ -32,6 +32,10 @@ export default {
         tasks: [],
     };
   },
+  created: async function() {
+    await this.fetchTasks();
+    console.log(this.tasks);
+  },
   updated: async function() {
     await this.fetchTasks();
     console.log(this.tasks);
