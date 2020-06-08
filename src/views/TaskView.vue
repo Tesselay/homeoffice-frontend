@@ -7,8 +7,8 @@
                     <input type="submit" class="input input__submit" form="task-form" value="+" v-on:click="createTask">
             </div>
             <div class="container__element container__element--task" v-for="item in tasks" :key="item">
-                <input type="submit" class="input input__submit" value="✓">
-                <span class="container__text input__text text__task">{{ item.body }}</span>
+                <input type="submit" class="input input__submit--finish" value="">
+                <span class="container__text text__task text__task--body">{{ item.body }}</span>
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>

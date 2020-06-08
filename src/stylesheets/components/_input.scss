@@ -32,6 +32,7 @@
     }
 
     &__submit {
+        min-width: 69.2167px;
         width: auto;
         padding: 0 1.2rem;
         background-color: #2D8EFF;
@@ -42,7 +43,19 @@
         &:active {
             background-color: darken(#2D8EFF, 20%);
             transform: translateY(.1rem);
-          }
+        }
+
+        &--finish {
+            border: .15rem solid #E4E6EA;
+            background-color: #ffffff;
+            outline: none !important;
+            padding: 0 1.2rem;
+            min-width: 69.2167px;
+        }
+
+        &:active:after {
+            content: "T";
+        }
 
     }
 

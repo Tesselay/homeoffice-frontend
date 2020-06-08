@@ -2,5 +2,9 @@
 
     &__task {
         color: $f-color-default;
+
+        &--body {
+            flex-grow: 1;
+        }
     }
 }
