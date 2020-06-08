@@ -3,7 +3,7 @@
         <div class="container container__taskView">
             <div class="container__element container__element--task">
                     <input type="text" class="input input__text" form="task-form" v-model="body">
-                    <input type="date" class="input input__date" form="task-form" v-model="finished">
+                    <input type="date" class="input input__date" form="task-form" v-model="finishBy">
                     <input type="submit" class="input input__submit" form="task-form" value="+" v-on:click="createTask">
             </div>
             <div class="container__element container__element--task">
@@ -25,18 +25,20 @@ export default {
   data() {
     return {
         body: "",
-        done: false,
         created: "", 
-        finished: "",
+        finishBy: "",
+        done: false,
+        finishedOn: "",
     };
   },
   methods: {
     createTask() {
         let taskData = {
             body: this.body,
-            done: this.done,
             created: new Date().toISOString().split('T')[0], 
-            finished: this.finished,
+            finishedBy: this.finishBy,
+            done: this.done,
+            finished: this.finishedOn,
         };
         this.__submitToServer(taskData);
     },
