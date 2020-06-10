@@ -7,11 +7,13 @@
                     <input type="submit" class="input input__submit" form="task-form" value="+" v-on:click="createTask">
             </div>
             <div class="container__element container__element--task" v-for="item in tasks" :key="item">
-                <input type="submit" class="input input__submit--finish" value="">
+              <template v-if="!item.done">  
+                <input type="submit" class="input input__submit--finish" v-on:click="finishTaskValueIndex = 1 - finishTaskValueIndex" v-bind:value="finishTaskValue[finishTaskValueIndex]">
                 <span class="container__text text__task text__task--body">{{ item.body }}</span>
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>
+              </template>
             </div>
         </div>
     </div>
@@ -30,16 +32,18 @@ export default {
         done: false,
         finishedOn: "",
         tasks: [],
+        finishTaskValueIndex: 0,      // Expression in input-tag switches this value between 0 and 1
+        finishTaskValue: [" ", "✔"]
     };
   },
   created: async function() {
     await this.fetchTasks();
     console.log(this.tasks);
   },
-  updated: async function() {
-    await this.fetchTasks();
-    console.log(this.tasks);
-  },
+  // updated: async function() {
+  //   await this.fetchTasks();
+  //   console.log(this.tasks);
+  // },
   methods: {
     createTask() {
         let taskData = {
