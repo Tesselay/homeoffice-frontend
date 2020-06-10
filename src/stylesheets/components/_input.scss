@@ -51,12 +51,18 @@
             outline: none !important;
             padding: 0 1.2rem;
             min-width: 69.2167px;
-        }
 
-        &:active:after {
-            content: "T";
-        }
 
+            &:active {
+                background-color: #ffffff;
+                
+                &:after {
+                    content: "✓";
+                    color: $f-color-default;
+                    font-size: 2.2rem;
+                }
+            }
+
+        }
     }
-
 }
