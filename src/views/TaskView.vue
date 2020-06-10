@@ -6,15 +6,13 @@
                     <input type="date" class="input input__date" form="task-form" v-model="finishBy">
                     <input type="submit" class="input input__submit" form="task-form" value="+" v-on:click="createTask">
             </div>
-            <div class="container__element container__element--task" v-for="item in tasks" :key="item">
-              <template v-if="!item.done">  
+            <div class="container__element container__element--task" v-for="item in filteredTasks" :key="item">
                 <button class="input input__submit input__submit--finish" v-on:click="item.done = true; editTask(item._id, item)"></button>
                 <span class="container__text text__task text__task--body">{{ item.body }}</span>
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>
                 <button class="input input__submit input__submit--delete" v-on:click="deleteTask(item._id)">☓</button>
-              </template>
             </div>
         </div>
     </div>
@@ -34,6 +32,11 @@ export default {
         finishedOn: "",
         tasks: [],
     };
+  },
+  computed: {
+    filteredTasks: function() {
+      return this.tasks.filter(i => i.done === false);
+    }
   },
   created: async function() {
     await this.fetchTasks();
