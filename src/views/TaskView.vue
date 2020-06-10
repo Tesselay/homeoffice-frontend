@@ -13,7 +13,7 @@
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>
-                <button class="input input__submit input__submit--delete">☓</button>
+                <button class="input input__submit input__submit--delete" v-on:click="__deleteFromServer(item._id)">☓</button>
               </template>
             </div>
         </div>
@@ -39,10 +39,10 @@ export default {
     await this.fetchTasks();
     console.log(this.tasks);
   },
-  // updated: async function() {
-  //   await this.fetchTasks();
-  //   console.log(this.tasks);
-  // },
+  updated: async function() {
+    await this.fetchTasks();
+    console.log(this.tasks);
+  },
   methods: {
     createTask() {
         let taskData = {
@@ -57,10 +57,13 @@ export default {
     __submitToServer(data) {
       axios.post(`${server.baseURL}/tasks/post`, data);
     },
+    __deleteFromServer(id) {
+      axios.delete(`${server.baseURL}/tasks/delete/${id}`);
+    },
     async fetchTasks() {
       await axios.get(`${server.baseURL}/tasks`)
            .then(response => (this.tasks = response.data));
-    }
+    },
   }
 };
 
