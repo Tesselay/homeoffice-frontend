@@ -13,6 +13,7 @@
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>
+                <button class="input input__submit input__submit--delete">☓</button>
               </template>
             </div>
         </div>
@@ -38,10 +39,10 @@ export default {
     await this.fetchTasks();
     console.log(this.tasks);
   },
-  updated: async function() {
-    await this.fetchTasks();
-    console.log(this.tasks);
-  },
+  // updated: async function() {
+  //   await this.fetchTasks();
+  //   console.log(this.tasks);
+  // },
   methods: {
     createTask() {
         let taskData = {
