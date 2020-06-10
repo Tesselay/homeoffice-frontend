@@ -8,7 +8,7 @@
             </div>
             <div class="container__element container__element--task" v-for="item in tasks" :key="item">
               <template v-if="!item.done">  
-                <button class="input input__submit input__submit--finish"></button>
+                <button class="input input__submit input__submit--finish" v-on:click="item.done = true; editTask(item._id, item)"></button>
                 <span class="container__text text__task text__task--body">{{ item.body }}</span>
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
@@ -51,13 +51,17 @@ export default {
         await this.__submitToServer(taskData);
         this.fetchTasks();
     },
-    fetchTasks() {
-      axios.get(`${server.baseURL}/tasks`)
-            .then(response => (this.tasks = response.data));
-    },
     async deleteTask(id) {
       await this.__deleteFromServer(id);
       this.fetchTasks();
+    },
+    async editTask(id, data) {
+      await this.__editOnServer(id, data);
+      this.fetchTasks();
+    },
+    fetchTasks() {
+      axios.get(`${server.baseURL}/tasks`)
+            .then(response => (this.tasks = response.data));
     },
     async __submitToServer(data) {
       await axios.post(`${server.baseURL}/tasks/post`, data);
@@ -65,6 +69,9 @@ export default {
     async __deleteFromServer(id) {
       await axios.delete(`${server.baseURL}/tasks/delete/${id}`);
     },
+    async __editOnServer(id, data) {
+      await axios.put(`${server.baseURL}/tasks/edit/${id}`, data);
+    }
   }
 };
 
