@@ -13,7 +13,7 @@
                 <div class="divider divider__vertical"></div>
                 <label for="due-date" class="container__text text__task">Due:</label>
                 <input type="date" id="due-date" class="input input__date" v-model="item.finishBy" disabled>
-                <button class="input input__submit input__submit--delete" v-on:click="__deleteFromServer(item._id)">☓</button>
+                <button class="input input__submit input__submit--delete" v-on:click="deleteTask(item._id)">☓</button>
               </template>
             </div>
         </div>
@@ -39,12 +39,8 @@ export default {
     await this.fetchTasks();
     console.log(this.tasks);
   },
-  updated: async function() {
-    await this.fetchTasks();
-    console.log(this.tasks);
-  },
   methods: {
-    createTask() {
+    async createTask() {
         let taskData = {
             body: this.body,
             created: new Date().toISOString().split('T')[0], 
@@ -52,17 +48,22 @@ export default {
             done: this.done,
             finishedOn: this.finishedOn,
         };
-        this.__submitToServer(taskData);
+        await this.__submitToServer(taskData);
+        this.fetchTasks();
     },
-    __submitToServer(data) {
-      axios.post(`${server.baseURL}/tasks/post`, data);
+    fetchTasks() {
+      axios.get(`${server.baseURL}/tasks`)
+            .then(response => (this.tasks = response.data));
     },
-    __deleteFromServer(id) {
-      axios.delete(`${server.baseURL}/tasks/delete/${id}`);
+    async deleteTask(id) {
+      await this.__deleteFromServer(id);
+      this.fetchTasks();
     },
-    async fetchTasks() {
-      await axios.get(`${server.baseURL}/tasks`)
-           .then(response => (this.tasks = response.data));
+    async __submitToServer(data) {
+      await axios.post(`${server.baseURL}/tasks/post`, data);
+    },
+    async __deleteFromServer(id) {
+      await axios.delete(`${server.baseURL}/tasks/delete/${id}`);
     },
   }
 };
