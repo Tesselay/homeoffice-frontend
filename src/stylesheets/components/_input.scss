@@ -1,84 +1,26 @@
-.input {
-
+.ipt {
     height: 4rem;
-    font-size: 2rem;
     border-radius: .7rem;
-    padding-left: 1rem;
-    border: .15rem solid #E4E6EA;
+    border: .15rem solid $gray;
     margin: .1rem;
     overflow: hidden;
     color: $f-color-default;
 
     &__text {
-        background-color: #F5F6F8;
+        background-color: $lightgray;
         width: auto;
-        flex-grow: 1;
 
-        &:focus {
-            background-color: #ffffff;
-            border-color: #2D8EFF;
-        }
+        margin-left: 0;
+
+        @include text-focus;
     }
 
     &__date {
-        background-color: #F5F6F8;
-        min-width: 255.267px;
+        background-color: $lightgray;
         width: auto;
+        min-width: 255.267px;   // The minimal width to prevent the x to overlap any test in date input
 
-        &:focus {
-            background-color: #ffffff;
-            border-color: #2D8EFF;
-        }
+        @include text-focus;
     }
 
-    &__submit {
-        min-width: 69.2167px;
-        width: auto;
-        padding: 0 1.2rem;
-        background-color: #2D8EFF;
-        border-color: #2D8EFF;
-        color: #ffffff;
-        outline: none !important;
-        font-size: 2rem;
-
-        &:active {
-            background-color: darken(#2D8EFF, 20%);
-            transform: translateY(.2rem);
-        }
-
-        &--finish {
-            border: .15rem solid #E4E6EA;
-            background-color: #ffffff;
-            outline: none !important;
-            padding: 0 1.2rem;
-            min-width: 69.2167px;
-
-
-            &:active {
-                background-color: #ffffff;
-                
-                &:after {
-                    content: "✓";
-                    color: $f-color-default;
-                    font-size: 2.2rem;
-                }
-            }
-        }
-
-        &--delete {
-            border: .15rem solid #F03229;
-            background-color: #F03229;
-            outline: none !important;
-            padding: 0 1.2rem;
-            min-width: 69.2167px;
-
-            content: "☓";
-            font-size: 2.2rem;
-
-            &:active {
-                background-color: darken(#F03229, 20%);
-            }
-        }
-
-    }
 }

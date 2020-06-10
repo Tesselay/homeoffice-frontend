@@ -1,10 +1,28 @@
-.text {
+.txt {
 
     &__task {
-        color: $f-color-default;
+        word-break: break-all;
+        margin: 0 1rem;
+    }
 
-        &--body {
-            flex-grow: 1;
-        }
+    &__btn {
+        margin: 0;
+    }
+
+    &__label {
+        margin: 0 1rem;
+    }
+
+    &__ipt {
+        padding-left: 1rem;
+    }
+
+    &--default {
+        font-size: $f-size-default;
+        color: $f-color-default;
+    }
+    
+    &--large {
+        font-size: $f-size-l;
     }
 }
