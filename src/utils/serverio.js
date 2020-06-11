@@ -40,9 +40,6 @@ export const serverIO = {
 		},
 		async finishTask(id, data) {
 			await this.createFinished(data);
-			console.log(id);
-			console.log(data);
-			console.log(this.finishedTask);
 			await this.__finishOnServer(id, this.finishedTask);
 			this.fetchTasks();
 		},

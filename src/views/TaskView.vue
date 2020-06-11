@@ -26,7 +26,6 @@ export default {
   },
   created: async function() {
     await this.fetchTasks();
-    console.log(this.tasks);
   }
 };
 
