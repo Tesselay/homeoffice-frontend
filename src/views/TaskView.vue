@@ -8,28 +8,22 @@
             </button>
         </div>
         <div class="taskview__element taskview__task" v-for="item in filteredTasks" :key="item">
-            <button class="btn btn--white" v-on:click="item.done = true; editTask(item._id, item)">
-            </button>
-            <span class="txt__task txt--default txt--large grow">{{ item.body }}</span>
-            <div class="divider__vertical"></div>
-            
-            <label class="txt__label txt--default">Due:</label>
-            <input type="date" class="ipt ipt__date txt__ipt txt--default" v-model="item.finishBy" disabled>
-            
-            <button class="btn btn--red" v-on:click="deleteTask(item._id)">
-                <span class="txt__btn txt--large">x</span>
-            </button>
+          <display-task :item=item @deleteTask="deleteTask(item._id)" @editTask="editTask(item._id, item)"></display-task>
         </div>
     </div>
 </template>
 
 <script>
 import { serverIO } from "../utils/serverio";
+import DisplayTask from "../components/DisplayTask";
 
 export default {
   mixins: [
     serverIO,
   ],
+  components: {
+    DisplayTask
+  },
   computed: {
     filteredTasks: function() {
       return this.tasks.filter(i => i.done === false);
