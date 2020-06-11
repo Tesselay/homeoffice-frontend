@@ -7,8 +7,8 @@
                 <span class="txt__btn txt--large">+</span>
             </button>
         </div>
-        <div class="taskview__element taskview__task" v-for="item in filteredTasks" :key="item">
-          <display-task :item=item @deleteTask="deleteTask(item._id)" @editTask="editTask(item._id, item)"></display-task>
+        <div class="taskview__element taskview__task" v-for="item in tasks" :key="item">
+          <display-task :item=item @deleteTask="deleteTask(item._id)" @finishTask="finishTask(item._id, item)"></display-task>
         </div>
     </div>
 </template>
@@ -23,11 +23,6 @@ export default {
   ],
   components: {
     DisplayTask
-  },
-  computed: {
-    filteredTasks: function() {
-      return this.tasks.filter(i => i.done === false);
-    },
   },
   created: async function() {
     await this.fetchTasks();

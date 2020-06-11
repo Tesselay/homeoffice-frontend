@@ -1,6 +1,6 @@
 <template>
 	<fragment>
-		<button class="btn btn--white" v-on:click="item.done = true; editTask()">
+		<button class="btn btn--white" v-on:click="finishTask()">
 		</button>
 		<span class="txt__task txt--default txt--large grow">{{ item.body }}</span>
 		<div class="divider__vertical"></div>
@@ -21,8 +21,8 @@ export default {
 		item: Object
 	},
 	methods: {
-		editTask() {
-			this.$emit("editTask");
+		finishTask() {
+			this.$emit("finishTask");
 		},
 		deleteTask() {
 			this.$emit("deleteTask");

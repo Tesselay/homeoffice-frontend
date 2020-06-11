@@ -7,9 +7,17 @@ export const serverIO = {
 			body: "",
 			created: "", 
 			finishBy: "",
-			done: false,
+
 			finishedOn: "",
+
 			tasks: [],
+
+			finishedTask: {
+				body: "",
+				created: "",
+				finishBy: "",
+				finishedOn: ""
+			}
 		};
 	},
 	methods: {
@@ -18,8 +26,6 @@ export const serverIO = {
 				body: this.body,
 				created: new Date().toISOString().split('T')[0], 
 				finishBy: this.finishBy,
-				done: this.done,
-				finishedOn: this.finishedOn,
 			};
 			await this.__submitToServer(taskData);
 			this.fetchTasks();
@@ -32,9 +38,26 @@ export const serverIO = {
 			await this.__editOnServer(id, data);
 			this.fetchTasks();
 		},
+		async finishTask(id, data) {
+			await this.createFinished(data);
+			console.log(id);
+			console.log(data);
+			console.log(this.finishedTask);
+			await this.__finishOnServer(id, this.finishedTask);
+			this.fetchTasks();
+		},
+		async createFinished(data) {
+			this.finishedTask.body = data.body;
+			this.finishedTask.created = data.created;
+			this.finishedTask.finishBy = data.finishBy;
+			this.finishedTask.finishedOn = new Date().toISOString().split('T')[0];
+		},
 		fetchTasks() {
 			axios.get(`${server.baseURL}/tasks`)
 				.then(response => (this.tasks = response.data));
+		},
+		async __finishOnServer(id, data) {
+			await axios.put(`${server.baseURL}/tasks/finish/${id}`, data)
 		},
 		async __submitToServer(data) {
 			await axios.post(`${server.baseURL}/tasks/post`, data);
