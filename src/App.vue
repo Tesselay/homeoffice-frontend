@@ -6,6 +6,3 @@
     <router-view />
   </div>
 </template>
-
-<style lang="sass">
-</style>
