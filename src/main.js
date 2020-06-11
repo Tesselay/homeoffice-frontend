@@ -5,9 +5,10 @@ import fragment from "vue-fragment";
 
 Vue.config.productionTip = false;
 
-Vue.use(fragment);
+Vue.use(fragment.Plugin);
 
 new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+
