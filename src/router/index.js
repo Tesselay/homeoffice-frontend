@@ -10,6 +10,10 @@ const routes = [
     name: "Tasks",
     component: TaskView
   },
+  {
+    path: '*',
+    redirect: "/application"
+  }
 ];
 
 const router = new VueRouter({
