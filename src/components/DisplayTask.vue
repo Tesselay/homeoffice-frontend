@@ -4,6 +4,7 @@
     <span class="txt__task txt--default txt--large grow">{{ item.body }}</span>
     <div class="divider__vertical"></div>
     <span
+      style="min-width: 264px"
       class="txt__task txt--default"
       v-if="daysLeft >= 0 && item.finishBy != ''"
       >{{ daysLeft }} Days left</span
