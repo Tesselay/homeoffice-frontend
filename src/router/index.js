@@ -11,7 +11,7 @@ const routes = [
     component: TaskView
   },
   {
-    path: '*',
+    path: "*",
     redirect: "/tasks"
   }
 ];
