@@ -43,45 +43,54 @@ export default {
       task: {
         body: "",
         created: "",
-        finishBy: "",
+        finishBy: ""
       }
-    }
+    };
   },
   components: {
     DisplayTask
   },
   created() {
-    TaskService.__fetchFromServer().then(response => (this.tasks = response.data));
+    TaskService.__fetchFromServer().then(
+      response => (this.tasks = response.data)
+    );
   },
   methods: {
     async createTask(data) {
-      console.log(data);
       let taskData = {
         body: data.body,
         created: new Date().toISOString().split("T")[0],
         finishBy: data.finishBy
       };
       await TaskService.__submitToServer(taskData);
-      TaskService.__fetchFromServer().then(response => (this.tasks = response.data));
+      TaskService.__fetchFromServer().then(
+        response => (this.tasks = response.data)
+      );
     },
     async deleteTask(id) {
       await TaskService.__deleteFromServer(id);
-      TaskService.__fetchFromServer().then(response => (this.tasks = response.data));    },
+      TaskService.__fetchFromServer().then(
+        response => (this.tasks = response.data)
+      );
+    },
     async editTask(id, data) {
       await TaskService.__editOnServer(id, data);
-      TaskService.__fetchFromServer().then(response => (this.tasks = response.data));
+      TaskService.__fetchFromServer().then(
+        response => (this.tasks = response.data)
+      );
     },
     async finishTask(id, data) {
       let finishedTaskData = {
         body: data.body,
         created: data.created,
         finishBy: data.finishBy,
-        finishedOn: new Date().toISOString().split("T")[0],
-      }
+        finishedOn: new Date().toISOString().split("T")[0]
+      };
       await FinishTaskService.__submitToServer(id, finishedTaskData);
-      TaskService.__fetchFromServer().then(response => (this.tasks = response.data));
-    },
+      TaskService.__fetchFromServer().then(
+        response => (this.tasks = response.data)
+      );
+    }
   }
-
 };
 </script>
