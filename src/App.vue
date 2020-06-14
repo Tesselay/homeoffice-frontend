@@ -6,3 +6,7 @@
     <router-view />
   </div>
 </template>
+
+<style lang="sass">
+@import "@/stylesheets/main.scss"
+</style>

@@ -45,7 +45,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass">
-@import "@/stylesheets/main.scss"
-</style>
