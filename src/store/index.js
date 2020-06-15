@@ -7,8 +7,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	modules: {
-		tasks,
-		// finishedTasks
+		tasks
 	}	
 })
 
