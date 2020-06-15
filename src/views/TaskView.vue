@@ -19,7 +19,7 @@
     </div>
     <div
       class="taskview__element taskview__task"
-      v-for="item in tasks"
+      v-for="item in all"
       :key="item"
     >
       <display-task
@@ -35,11 +35,11 @@
 import DisplayTask from "../components/DisplayTask";
 import TaskService from "../api/modules/TaskService";
 import FinishTaskService from "../api/modules/FinishedTaskService";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data: function() {
     return {
-      tasks: [],
       task: {
         body: "",
         created: "",
@@ -47,38 +47,17 @@ export default {
       }
     };
   },
+  computed: {
+	...mapState('tasks', ['all']),
+},
   components: {
     DisplayTask
   },
   created() {
-    TaskService.__fetchFromServer().then(
-      response => (this.tasks = response.data)
-    );
-  },
+	  this.$store.dispatch('tasks/fetchFromServer');
+	},
   methods: {
-    async createTask(data) {
-      let taskData = {
-        body: data.body,
-        created: new Date().toISOString().split("T")[0],
-        finishBy: data.finishBy
-      };
-      await TaskService.__submitToServer(taskData);
-      TaskService.__fetchFromServer().then(
-        response => (this.tasks = response.data)
-      );
-    },
-    async deleteTask(id) {
-      await TaskService.__deleteFromServer(id);
-      TaskService.__fetchFromServer().then(
-        response => (this.tasks = response.data)
-      );
-    },
-    async editTask(id, data) {
-      await TaskService.__editOnServer(id, data);
-      TaskService.__fetchFromServer().then(
-        response => (this.tasks = response.data)
-      );
-    },
+	  ...mapActions("tasks", ["createTask", "deleteTask"]),
     async finishTask(id, data) {
       let finishedTaskData = {
         body: data.body,
