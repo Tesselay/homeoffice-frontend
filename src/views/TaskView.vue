@@ -22,9 +22,7 @@
       v-for="(_, index) in all"
       :key="_"
     >
-      <display-task
-	  	:index="index"
-      ></display-task>
+      <display-task :index="index"></display-task>
     </div>
   </div>
 </template>
@@ -44,16 +42,16 @@ export default {
     };
   },
   computed: {
-	...mapState('tasks', ['all']),
-},
+    ...mapState("tasks", ["all"])
+  },
   components: {
     DisplayTask
   },
   created() {
-	  this.$store.dispatch('tasks/fetchFromServer');
-	},
+    this.$store.dispatch("tasks/fetchFromServer");
+  },
   methods: {
-	  ...mapActions("tasks", ["createTask"])
+    ...mapActions("tasks", ["createTask"])
   }
 };
 </script>
