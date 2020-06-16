@@ -1,7 +1,12 @@
 <template>
   <fragment>
-    <button class="btn btn--white" v-on:click="finishTask([all[index]._id, all[index]])"></button>
-    <span class="txt__task txt--default txt--large grow">{{ all[index].body }}</span>
+    <button
+      class="btn btn--white"
+      v-on:click="finishTask([all[index]._id, all[index]])"
+    ></button>
+    <span class="txt__task txt--default txt--large grow">{{
+      all[index].body
+    }}</span>
     <div class="divider__vertical"></div>
     <span
       style="min-width: 264px"
@@ -21,11 +26,11 @@ import { mapState, mapActions } from "vuex";
 export default {
   name: "DisplayTask",
   props: {
-	  index: Number
+    index: Number
   },
   computed: {
-	...mapState('tasks', ['all']),
-},
+    ...mapState("tasks", ["all"])
+  },
   created: function() {
     let finishBySeparated = this.all[this.index].finishBy.split("-");
     let createdSeparated = this.all[this.index].created.split("-");
@@ -42,15 +47,16 @@ export default {
     }
     if (diffDay > 0) {
       this.daysLeft += diffDay;
-	}
+    }
   },
   data() {
     return {
-	  daysLeft: 0,
+      daysLeft: 0
     };
   },
   methods: {
-	  ...mapActions("tasks", ["deleteTask", "finishTask"])
+    ...mapActions("tasks", ["deleteTask"]),
+    ...mapActions("finishedTasks", ["finishTask"])
   }
 };
 </script>
