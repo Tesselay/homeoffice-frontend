@@ -17,24 +17,24 @@ const actions = {
 	fetchFromServer ({ commit }) {
 		TaskService.__fetchFromServer().then(response => (commit('setTasks', response.data)))
 	},
-	async createTask({ commit },  data) {
+	async createTask({ dispatch },  data) {
 		let taskData = {
 		  body: data.body,
 		  created: new Date().toISOString().split("T")[0],
 		  finishBy: data.finishBy
 		};
 		await TaskService.__submitToServer(taskData);
-		TaskService.__fetchFromServer().then(response => (commit('setTasks', response.data)))
+		dispatch("fetchFromServer");
 	},
-	async deleteTask({ commit }, id) {
+	async deleteTask({ dispatch }, id) {
 		await TaskService.__deleteFromServer(id);
-		TaskService.__fetchFromServer().then(response => (commit('setTasks', response.data)))
+		dispatch("fetchFromServer");
 	},
-	async editTask({ commit }, id, data) {
+	async editTask({ dispatch }, [id, data]) {
 		await TaskService.__editOnServer(id, data);
-		TaskService.__fetchFromServer().then(response => (commit('setTasks', response.data)))
+		dispatch("fetchFromServer");
 	},
-	async finishTask({ commit }, [id, data]) {
+	async finishTask({ dispatch }, [id, data]) {
 		console.log("id: ", id);
 		console.log(data);
 		let finishedTaskData = {
@@ -44,7 +44,7 @@ const actions = {
 		  finishedOn: new Date().toISOString().split("T")[0]
 		};
 		await FinishedTaskService.__submitToServer(id, finishedTaskData);
-		TaskService.__fetchFromServer().then(response => (commit('setTasks', response.data)))
+		dispatch("fetchFromServer");
 	}
 }
 
